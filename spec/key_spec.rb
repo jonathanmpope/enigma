@@ -22,4 +22,10 @@ RSpec.describe do
       expect(@key_2.a_key).to eq("01")
     end
 
+    it 'creates a B key' do
+      expect(@key.b_key.length).to eq(2)
+      expect(@key.b_key.class).to eq(String)
+      expect(@key_2.b_key).to eq("15")
+    end
+
 end
