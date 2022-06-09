@@ -1,8 +1,10 @@
 class Offset
-  attr_reader :date
+  attr_reader :date, :a_key
 
   def initialize(date = date_gen)
     @date = date
+    @offset_numbers = offset_numbers
+    @a_key = a_key_gen
   end
 
   def date_gen
@@ -16,6 +18,11 @@ class Offset
   def offset_numbers
     squared = @date.to_i**2
     @last_four = squared.to_s[-4..-1]
+  end
+
+  def a_key_gen
+    # binding.pry
+    @a_key = @last_four[0]
   end
 
 

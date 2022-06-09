@@ -21,7 +21,19 @@ RSpec.describe do
     end
 
     it 'creates the offset numbers' do
+      date = Time.now.to_s
+      y = date[2..3]
+      m = date[5..6]
+      d = date[8..9]
+      final = m.concat(d).concat(y)
+      squared = final.to_i**2
+      last_four = squared.to_s[-4..-1]
+      expect(@offset.offset_numbers).to eq(last_four)
       expect(@offset_2.offset_numbers).to eq("2464")
+    end
+
+    it 'creates an a key' do
+      expect(@offset_2.a_key).to eq("2")
     end
 
 
