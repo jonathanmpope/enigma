@@ -41,4 +41,9 @@ RSpec.describe do
       expect(@offset.c_key).to eq(@last_four[2])
       expect(@offset_2.c_key).to eq("6")
     end
+
+    it 'creates a d key' do
+      expect(@offset.d_key).to eq(@last_four[3])
+      expect(@offset_2.d_key).to eq("4")
+    end
   end
