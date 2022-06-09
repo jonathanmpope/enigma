@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe do
   before :each do
       @key = Key.new
-      @key_2 = Key.new("015523")
+      @key_2 = Key.new("01552")
     end
 
     it 'exists' do
@@ -13,7 +13,7 @@ RSpec.describe do
     it 'creates a random five digit number' do
       expect(@key.num.length).to eq(5)
       expect(@key.num.class).to eq(String)
-      expect(@key_2.num).to eq("015523")
+      expect(@key_2.num).to eq("01552")
     end
 
     it 'creates an A key' do
@@ -32,6 +32,12 @@ RSpec.describe do
       expect(@key.c_key.length).to eq(2)
       expect(@key.c_key.class).to eq(String)
       expect(@key_2.c_key).to eq("55")
+    end
+
+    it 'creates a D key' do
+      expect(@key.d_key.length).to eq(2)
+      expect(@key.d_key.class).to eq(String)
+      expect(@key_2.d_key).to eq("52")
     end
 
 end
