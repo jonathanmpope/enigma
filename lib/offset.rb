@@ -1,11 +1,12 @@
 class Offset
-  attr_reader :date, :a_key, :b_key
+  attr_reader :date, :a_key, :b_key, :c_key
 
   def initialize(date = date_gen)
     @date = date
     @offset_numbers = offset_numbers
     @a_key = a_key_gen
-    @b_key = b_key_gen 
+    @b_key = b_key_gen
+    @c_key = c_key_gen
   end
 
   def date_gen
@@ -27,6 +28,10 @@ class Offset
 
   def b_key_gen
     @b_key = @last_four[1]
+  end
+
+  def c_key_gen
+    @c_key = @last_four[2]
   end
 
 
