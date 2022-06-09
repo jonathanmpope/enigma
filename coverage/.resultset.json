@@ -41,8 +41,18 @@
       "/Users/jonathanpope/turing/1mod/projects/enigma/lib/offset.rb": {
         "lines": [
           1,
+          1,
           null,
           1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
           null,
           null,
           null,
@@ -50,6 +60,6 @@
         ]
       }
     },
-    "timestamp": 1654815671
+    "timestamp": 1654816479
   }
 }
