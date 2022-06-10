@@ -25,4 +25,8 @@ RSpec.describe do
       expect(@message.message_array_of_strings(@message.info)).to eq(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " ", "e", "n", "d"])
     end
 
+    it 'it has access to the message broken into an array of strings' do
+      expect(@message.broken_up).to eq(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " ", "e", "n", "d"])
+    end
+
 end
