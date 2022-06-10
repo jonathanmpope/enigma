@@ -2,10 +2,6 @@ require 'spec_helper'
 
 RSpec.describe do
   before :each do
-    @offset = Offset.new("011092")
-    @key = Key.new("01552")
-    @shift = Shift.new(@key, @offset)
-    @message = Message.new("hello world end")
     @enigma = Enigma.new
   end
 
@@ -29,5 +25,9 @@ RSpec.describe do
   it 'can create a date if one is not passed in' do
      expect(@enigma.date_gen.length).to eq(6)
      expect(@enigma.date_gen.class).to eq(String)
+  end
+
+  it 'can create key, offset, shift, and message objects' do
+    expect(@enigma.object_creator("hello world", "02715", "040895").class).to eq(Shift)
   end
 end

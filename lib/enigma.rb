@@ -5,6 +5,7 @@ class Enigma
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
+    binding.pry
     object_creator(info, key, date)
 
   end
@@ -13,6 +14,7 @@ class Enigma
     @message = Message.new(info)
     @key = Key.new(key)
     @offset = Offset.new(date)
+    @shift = Shift.new(@key, @offset)
   end
 
   def key_creator
