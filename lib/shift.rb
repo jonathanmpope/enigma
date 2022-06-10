@@ -1,7 +1,12 @@
 class Shift
+  attr_reader :a_shift, :b_shift, :c_shift, :d_shift
 
-  def initialize
-    # @argument = argument
+  def initialize(key, offset)
+    @shifts = create_shift(key, offset)
+    @a_shift = a_shift
+    @b_shift = b_shift
+    @c_shift = c_shift
+    @d_shift = d_shift
   end
 
   def create_shift(key, offset)
