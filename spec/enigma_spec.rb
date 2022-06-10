@@ -70,4 +70,9 @@ RSpec.describe do
                                    })
   end
 
+  it 'can decrypt the message - helper function' do
+    @enigma.object_creator("keder ohulw", "02715", "040895")
+    expect(@enigma.decryption_process).to eq("hello world")
+  end
+
 end
