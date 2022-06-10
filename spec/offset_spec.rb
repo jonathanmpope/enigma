@@ -48,7 +48,7 @@ RSpec.describe do
   end
 
   it 'can generate all the keys' do
-    @offset_2.key_gen
+    @offset_2.offset_key_gen
     expect(@offset_2.a_key).to eq("2")
     expect(@offset_2.b_key).to eq("4")
     expect(@offset_2.c_key).to eq("6")
