@@ -1,7 +1,6 @@
 class Enigma
 
   def initialize
-
   end
 
   def encrypt(info, key = key_creator, date = date_gen)

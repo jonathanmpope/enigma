@@ -46,4 +46,13 @@ RSpec.describe do
     expect(@offset.d_key).to eq(@last_four[3])
     expect(@offset_2.d_key).to eq("4")
   end
+
+  it 'can generate all the keys' do
+    @offset_2.key_gen
+    expect(@offset_2.a_key).to eq("2")
+    expect(@offset_2.b_key).to eq("4")
+    expect(@offset_2.c_key).to eq("6")
+    expect(@offset_2.d_key).to eq("4")
+  end
+
 end
