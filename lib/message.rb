@@ -12,7 +12,7 @@ class Message
   end
 
   def message_hash(message)
-    array = message.chars
+    array = message.downcase.chars
     indexes = Array(0..array.size - 1)
     Hash[indexes.zip array]
   end
