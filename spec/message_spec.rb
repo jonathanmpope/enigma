@@ -10,6 +10,7 @@ RSpec.describe do
 
     it 'exists' do
       expect(@message).to be_instance_of Message
+      # binding.pry
     end
 
     it 'takes in a message' do
@@ -18,6 +19,10 @@ RSpec.describe do
 
     it 'creates a character set' do
       expect(@message.character_set).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "])
+    end
+
+    it 'breaks the message into an array of strings' do
+      expect(@message.message_array_of_strings(@message.info)).to eq(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " ", "e", "n", "d"])
     end
 
 end
