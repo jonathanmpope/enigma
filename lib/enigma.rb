@@ -1,4 +1,5 @@
 class Enigma
+  attr_reader :message
 
   def initialize
     # @argument = argument
@@ -30,4 +31,20 @@ class Enigma
     m.concat(d).concat(y)
   end
 
+  def encryption_process
+    @encryption = @message.broken_up.map do |index, letter|
+      if index % 4 == 0
+        letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
+      elsif index % 4 == 1
+        letter = @message.set.rotate(@shift.b_shift + @message.set.find_index(letter))[0]
+      elsif index % 4 == 2
+        letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
+      elsif index % 4 == 3
+        letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
+      else
+        letter
+      end
+    end
+    @encryption.join("")
+  end
 end

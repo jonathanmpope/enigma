@@ -5,7 +5,7 @@ RSpec.describe do
     @offset = Offset.new("011092")
     @key = Key.new("01552")
     @shift = Shift.new(@key, @offset)
-    @message = Message.new("hello world end")
+    @message = Message.new("hello world")
   end
 
   it 'exists' do
@@ -13,19 +13,19 @@ RSpec.describe do
   end
 
   it 'takes in a message' do
-    expect(@message.info).to eq("hello world end")
+    expect(@message.info).to eq("hello world")
   end
 
   it 'creates a character set' do
     expect(@message.character_set).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "])
   end
 
-  it 'breaks the message into an array of strings' do
-    expect(@message.message_array_of_strings(@message.info)).to eq(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " ", "e", "n", "d"])
+  it 'breaks the message into a hash of strings' do
+    expect(@message.message_hash(@message.info)).to eq({0=>"h", 1=>"e", 2=>"l",  3=>"l", 4=>"o", 5=>" ",  6=>"w", 7=>"o", 8=>"r",  9=>"l",  10=>"d"})
   end
 
-  it 'it has access to the message broken into an array of strings' do
-    expect(@message.broken_up).to eq(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " ", "e", "n", "d"])
+  it 'it has access to the message broken into a hash with index and letters as strings' do
+    expect(@message.broken_up).to eq({0=>"h", 1=>"e", 2=>"l",  3=>"l", 4=>"o", 5=>" ",  6=>"w", 7=>"o", 8=>"r",  9=>"l",  10=>"d"})
   end
 
   it 'it has access to the character_set' do

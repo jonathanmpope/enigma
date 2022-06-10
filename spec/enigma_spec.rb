@@ -30,4 +30,9 @@ RSpec.describe do
   it 'can create key, offset, shift, and message objects' do
     expect(@enigma.object_creator("hello world", "02715", "040895").class).to eq(Shift)
   end
+
+  it 'can encrypt the message - helper function' do
+    @enigma.object_creator("hello world", "02715", "040895")
+    expect(@enigma.encryption_process).to eq("keder ohulw")
+  end
 end
