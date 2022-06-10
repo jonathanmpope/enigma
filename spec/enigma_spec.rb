@@ -62,11 +62,26 @@ RSpec.describe do
     expect(@enigma.encrypt("HELLO WORLD", "02715", "040895")[:encryption]).to eq("keder ohulw")
   end
 
-  it "can decrypt a message" do
+  it "can decrypt a message " do
     expect(@enigma.decrypt("keder ohulw", "02715", "040895")).to eq({
                                     decryption: "hello world",
                                     key: "02715",
                                     date: "040895"
+                                   })
+  end
+
+  it "can decrypt a message without a date input" do
+    today = Time.now.to_s
+    y = today[2..3]
+    m = today[5..6]
+    d = today[8..9]
+    date = m.concat(d).concat(y)
+    hash = @enigma.decrypt("keder ohulw", "02715", date)
+    # binding.pry
+    expect(@enigma.decrypt("keder ohulw", "02715")).to eq({
+                                    decryption: hash[:decryption],
+                                    key: "02715",
+                                    date: hash[:date]
                                    })
   end
 
@@ -82,5 +97,4 @@ RSpec.describe do
   it 'can decrypt the message - can deal with upper case letters' do
     expect(@enigma.decrypt("KEDer ohulw", "02715", "040895")[:decryption]).to eq("hello world")
   end
-
 end
