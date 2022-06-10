@@ -9,7 +9,7 @@ RSpec.describe do
     expect(@enigma).to be_instance_of Enigma
   end
 
-  xit 'can encrypt a message' do
+  it 'can encrypt a message' do
     expect(@enigma.encrypt("hello world", "02715", "040895")).to eq({
                                     encryption: "keder ohulw",
                                     key: "02715",
@@ -35,4 +35,5 @@ RSpec.describe do
     @enigma.object_creator("hello world", "02715", "040895")
     expect(@enigma.encryption_process).to eq("keder ohulw")
   end
+
 end

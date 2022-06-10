@@ -6,9 +6,13 @@ class Enigma
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
-    binding.pry
     object_creator(info, key, date)
-
+    # binding.pry
+    encryption = {
+      encryption: encryption_process,
+      key: @key.num,
+      date: @offset.date
+    }
   end
 
   def object_creator(info, key, date)
@@ -32,7 +36,7 @@ class Enigma
   end
 
   def encryption_process
-    @encryption = @message.broken_up.map do |index, letter|
+    @encryption_message = @message.broken_up.map do |index, letter|
       if index % 4 == 0
         letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
       elsif index % 4 == 1
@@ -45,6 +49,6 @@ class Enigma
         letter
       end
     end
-    @encryption.join("")
+    @encryption_message.join("")
   end
 end
