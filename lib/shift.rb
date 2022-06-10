@@ -16,5 +16,4 @@ class Shift
     @d_shift = key.d_key.to_i + offset.d_key.to_i
     "#{@a_shift}#{@b_shift}#{@c_shift}#{@d_shift}"
   end
-
 end
