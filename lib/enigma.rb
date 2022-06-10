@@ -13,6 +13,16 @@ class Enigma
     }
   end
 
+  def decrypt(info, key, date = date_gen)
+    object_creator(info, key, date)
+    encryption = {
+      decryption: decryption_process,
+      key: @key.num,
+      date: @offset.date
+    }
+  end
+
+
   def object_creator(info, key, date)
     @message = Message.new(info)
     @key = Key.new(key)
@@ -39,7 +49,6 @@ class Enigma
   end
 
   def encryption_logic(index, letter)
-    # binding.pry
     if index % 4 == 0 && @message.set.include?(letter) == true
       letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
     elsif index % 4 == 1 && @message.set.include?(letter) == true
@@ -48,6 +57,25 @@ class Enigma
       letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
     elsif index % 4 == 3 && @message.set.include?(letter) == true
       letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
+    else
+      letter
+    end
+  end
+
+  def decryption_process
+    @decryption_message = @message.broken_up.map { |index, letter| decryption_logic(index, letter) }
+    @decryption_message.join("")
+  end
+
+  def decryption_logic(index, letter)
+    if index % 4 == 0 && @message.set.include?(letter) == true
+      letter = @message.set.rotate(-@shift.a_shift + @message.set.find_index(letter))[0]
+    elsif index % 4 == 1 && @message.set.include?(letter) == true
+      letter = @message.set.rotate(-@shift.b_shift + @message.set.find_index(letter))[0]
+    elsif index % 4 == 2 && @message.set.include?(letter) == true
+      letter = @message.set.rotate(-@shift.c_shift + @message.set.find_index(letter))[0]
+    elsif index % 4 == 3 && @message.set.include?(letter) == true
+      letter = @message.set.rotate(-@shift.d_shift + @message.set.find_index(letter))[0]
     else
       letter
     end
