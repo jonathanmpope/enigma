@@ -25,4 +25,9 @@ RSpec.describe do
      expect(@enigma.key_creator.length).to eq(5)
      expect(@enigma.key_creator.class).to eq(String)
   end
+
+  it 'can create a date if one is not passed in' do
+     expect(@enigma.date_gen.length).to eq(6)
+     expect(@enigma.date_gen.class).to eq(String)
+  end
 end
