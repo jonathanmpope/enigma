@@ -39,5 +39,4 @@ RSpec.describe do
       expect(@key.d_key.class).to eq(String)
       expect(@key_2.d_key).to eq("52")
     end
-
 end
