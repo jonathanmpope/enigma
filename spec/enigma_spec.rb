@@ -55,13 +55,15 @@ RSpec.describe do
   end
 
   it 'can encrypt the message - helper function - can deal with symbols' do
-    @enigma.object_creator("hello wor!d", "02715", "040895")
-    expect(@enigma.encryption_process).to eq("keder ohu!w")
+    expect(@enigma.encrypt("hello wor!d", "02715", "040895")[:encryption]).to eq("keder ohu!w")
   end
 
   it 'can encrypt the message - helper function - can deal with upper case letters' do
-    @enigma.object_creator("HELLO WORLD", "02715", "040895")
-    expect(@enigma.encryption_process).to eq("keder ohulw")
+    expect(@enigma.encrypt("HELLO WORLD", "02715", "040895")[:encryption]).to eq("keder ohulw")
+  end
+
+  xit "can decrypt a message" do
+
   end
 
 end
