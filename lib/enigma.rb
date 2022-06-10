@@ -7,7 +7,6 @@ class Enigma
 
   def encrypt(info, key = key_creator, date = date_gen)
     object_creator(info, key, date)
-    # binding.pry
     encryption = {
       encryption: encryption_process,
       key: @key.num,

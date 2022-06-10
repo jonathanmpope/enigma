@@ -17,6 +17,20 @@ RSpec.describe do
                                    })
   end
 
+  it 'can encrypt a message without the date provided' do
+    today = Time.now.to_s
+    y = today[2..3]
+    m = today[5..6]
+    d = today[8..9]
+    date = m.concat(d).concat(y)
+    hash = @enigma.encrypt("hello world", "02715", date)
+    expect(@enigma.encrypt("hello world", "02715")).to eq({
+                                    encryption: hash[:encryption],
+                                    key: "02715",
+                                    date: date
+                                   })
+  end
+
   it 'can create keys if one is not passed in' do
      expect(@enigma.key_creator.length).to eq(5)
      expect(@enigma.key_creator.class).to eq(String)
