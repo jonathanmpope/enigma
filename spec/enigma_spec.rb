@@ -54,4 +54,8 @@ RSpec.describe do
     expect(@enigma.encryption_process).to eq("keder ohulw")
   end
 
+  it 'can encrypt the message - helper function - can deal with symbols' do
+    @enigma.object_creator("hello wor!d", "02715", "040895")
+    expect(@enigma.encryption_process).to eq("keder ohu!w")
+  end
 end

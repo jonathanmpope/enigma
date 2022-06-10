@@ -1,8 +1,7 @@
 class Enigma
-  attr_reader :message
 
   def initialize
-    # @argument = argument
+
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
@@ -40,13 +39,14 @@ class Enigma
   end
 
   def encryption_logic(index, letter)
-    if index % 4 == 0
+    # binding.pry
+    if index % 4 == 0 && @message.set.include?(letter) == true
       letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 1
+    elsif index % 4 == 1 && @message.set.include?(letter) == true
       letter = @message.set.rotate(@shift.b_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 2
+    elsif index % 4 == 2 && @message.set.include?(letter) == true
       letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 3
+    elsif index % 4 == 3 && @message.set.include?(letter) == true
       letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
     else
       letter

@@ -13,6 +13,7 @@ class Message
 
   def message_hash(message)
     array = message.chars
-    Hash[(0...array.size).zip array]
+    indexes = Array(0..array.size - 1)
+    Hash[indexes.zip array]
   end
 end
