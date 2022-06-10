@@ -1,7 +1,8 @@
 class Message
+  attr_reader :info 
 
-  def initialize
-    # @argument = argument
+  def initialize(info)
+    @info = info
   end
 
 end
