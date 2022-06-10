@@ -14,5 +14,4 @@ class Message
   def message_array_of_strings(message)
     message.chars
   end
-
 end
