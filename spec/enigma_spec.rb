@@ -31,6 +31,10 @@ RSpec.describe do
                                    })
   end
 
+  it 'can encrypt a message without the date or key provided' do
+    expect(@enigma.encrypt("hello world")[:key].length).to eq(5)
+  end
+
   it 'can create keys if one is not passed in' do
      expect(@enigma.key_creator.length).to eq(5)
      expect(@enigma.key_creator.class).to eq(String)
