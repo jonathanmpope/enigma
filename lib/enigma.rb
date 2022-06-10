@@ -35,19 +35,21 @@ class Enigma
   end
 
   def encryption_process
-    @encryption_message = @message.broken_up.map do |index, letter|
-      if index % 4 == 0
-        letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
-      elsif index % 4 == 1
-        letter = @message.set.rotate(@shift.b_shift + @message.set.find_index(letter))[0]
-      elsif index % 4 == 2
-        letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
-      elsif index % 4 == 3
-        letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
-      else
-        letter
-      end
-    end
+    @encryption_message = @message.broken_up.map { |index, letter| encryption_logic(index, letter) }
     @encryption_message.join("")
+  end
+
+  def encryption_logic(index, letter)
+    if index % 4 == 0
+      letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
+    elsif index % 4 == 1
+      letter = @message.set.rotate(@shift.b_shift + @message.set.find_index(letter))[0]
+    elsif index % 4 == 2
+      letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
+    elsif index % 4 == 3
+      letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
+    else
+      letter
+    end
   end
 end
