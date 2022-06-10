@@ -29,4 +29,8 @@ RSpec.describe do
       expect(@message.broken_up).to eq(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", " ", "e", "n", "d"])
     end
 
+    it 'it has access to the character_set' do
+      expect(@message.set).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "])
+    end
+
 end
