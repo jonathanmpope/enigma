@@ -8,7 +8,6 @@ class Enigma
   def initialize(from_file = nil, to_file = nil)
     @from_file = from_file
     @to_file = to_file
-    @enc_output = nil
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
@@ -22,7 +21,7 @@ class Enigma
 
   def decrypt(info, key, date = date_gen)
     object_creator(info, key, date)
-    decryption = {
+    @decryption = {
       decryption: decryption_process,
       key: @key.num,
       date: @offset.date
@@ -93,19 +92,28 @@ class Enigma
     indata = in_file.read
     in_file.close
     encrypt(indata)
-    enc_file_writer(@encryption[:encryption])
+    file_writer(@encryption[:encryption])
     indata
   end
 
-  def enc_file_writer(message)
+  def file_writer(message)
     out_file = File.open(@to_file, 'w')
     out_file.write(message)
     out_file.close
-    enc_message
+    message
   end
 
-  def enc_message
-    puts "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"
-    "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"
+  def message
+    puts "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+    "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+  end
+
+  def dec_file_read(key, date)
+    in_file = File.open(@from_file, "r")
+    indata = in_file.read
+    in_file.close
+    decrypt(indata, key, date)
+    file_writer(@decryption[:decryption])
+    indata
   end
 end

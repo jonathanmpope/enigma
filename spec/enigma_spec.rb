@@ -98,24 +98,33 @@ RSpec.describe do
     expect(@enigma.decrypt("KEDer ohulw", "02715", "040895")[:decryption]).to eq("hello world")
   end
 
-  it 'can read a file' do
+  it 'can read a file using enc file read method' do
     from_file = 'test_read_file.txt'
     to_file = 'encrypted.txt'
     @enigma = Enigma.new(from_file, to_file)
     expect(@enigma.enc_file_read).to include("This is a test")
+  end
+
+  it 'can read a file using dec file read method' do
+    from_file = 'test_read_file.txt'
+    to_file = 'encrypted.txt'
+    key = "05150"
+    date = "052122"
+    @enigma = Enigma.new(from_file, to_file)
+    expect(@enigma.dec_file_read(key, date)).to include("This is a test")
   end
 
   it 'can write a file' do
     from_file = 'test_read_file.txt'
     to_file = 'encrypted.txt'
     @enigma = Enigma.new(from_file, to_file)
-    expect(@enigma.enc_file_read).to include("This is a test")
+    @enigma.enc_file_read
+    expect(@enigma.message).to include(to_file)
   end
 
   it 'can print an enryption message' do
     @enigma.object_creator("keder ohulw", "02715", "040895")
-    @enigma.enc_message
-    expect(@enigma.enc_message).to include("Created")
+    @enigma.message
+    expect(@enigma.message).to include("Created")
   end
-
 end
