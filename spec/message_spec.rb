@@ -2,10 +2,11 @@ require 'spec_helper'
 
 RSpec.describe do
   before :each do
-    @offset = Offset.new("011092")
-    @key = Key.new("01552")
+    @offset = Offset.new("040895")
+    @key = Key.new("02715")
     @shift = Shift.new(@key, @offset)
     @message = Message.new("hello world")
+    @message_2 = Message.new("keder ohulw")
   end
 
   it 'exists' do
@@ -30,5 +31,31 @@ RSpec.describe do
 
   it 'it has access to the character_set' do
     expect(@message.set).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "])
+  end
+
+  it 'can encrypt the message - helper function' do
+    expect(@message.encryption_process(@shift)).to eq("keder ohulw")
+  end
+
+  it 'can decrypt the message - helper function' do
+    expect(@message_2.decryption_process(@shift)).to eq("hello world")
+  end
+
+  it 'can use decryption_logic' do
+    index = 0
+    letter = "k"
+    expect(@message_2.decryption_logic(@shift, index, letter)).to eq("h")
+  end
+
+  it 'can use encryption_logic' do
+    index = 0
+    letter = "h"
+    expect(@message.encryption_logic(@shift, index, letter)).to eq("k")
+  end
+
+  it 'can assign letters' do
+    letter = "h"
+    let_shift = 3
+    expect(@message.let_assign(letter, let_shift)).to eq("k")
   end
 end

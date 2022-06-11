@@ -8,13 +8,12 @@ class Enigma
   def initialize(from_file = nil, to_file = nil)
     @from_file = from_file
     @to_file = to_file
-    @enc_output = nil
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
     object_creator(info, key, date)
     @encryption = {
-      encryption: encryption_process,
+      encryption: @message.encryption_process(@shift),
       key: @key.num,
       date: @offset.date
     }
@@ -22,13 +21,12 @@ class Enigma
 
   def decrypt(info, key, date = date_gen)
     object_creator(info, key, date)
-    decryption = {
-      decryption: decryption_process,
+    @decryption = {
+      decryption: @message.decryption_process(@shift),
       key: @key.num,
       date: @offset.date
     }
   end
-
 
   def object_creator(info, key, date)
     @message = Message.new(info)
@@ -50,62 +48,33 @@ class Enigma
     m.concat(d).concat(y)
   end
 
-  def encryption_process
-    @encryption_message = @message.broken_up.map { |index, letter| encryption_logic(index, letter) }
-    @encryption_message.join("")
-  end
-
-  def encryption_logic(index, letter)
-    if index % 4 == 0 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 1 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(@shift.b_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 2 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 3 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
-    else
-      letter
-    end
-  end
-
-  def decryption_process
-    @decryption_message = @message.broken_up.map { |index, letter| decryption_logic(index, letter) }
-    @decryption_message.join("")
-  end
-
-  def decryption_logic(index, letter)
-    if index % 4 == 0 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(-@shift.a_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 1 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(-@shift.b_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 2 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(-@shift.c_shift + @message.set.find_index(letter))[0]
-    elsif index % 4 == 3 && @message.set.include?(letter) == true
-      letter = @message.set.rotate(-@shift.d_shift + @message.set.find_index(letter))[0]
-    else
-      letter
-    end
-  end
-
   def enc_file_read
     in_file = File.open(@from_file, "r")
     indata = in_file.read
     in_file.close
     encrypt(indata)
-    enc_file_writer(@encryption[:encryption])
+    file_writer(@encryption[:encryption])
     indata
   end
 
-  def enc_file_writer(message)
+  def file_writer(info)
     out_file = File.open(@to_file, 'w')
-    out_file.write(message)
+    out_file.write(info)
     out_file.close
-    enc_message
+    message
   end
 
-  def enc_message
-    puts "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"
-    "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"
+  def message
+    puts "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+    "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+  end
+
+  def dec_file_read(key, date)
+    in_file = File.open(@from_file, "r")
+    indata = in_file.read
+    in_file.close
+    decrypt(indata, key, date)
+    file_writer(@decryption[:decryption])
+    indata
   end
 end

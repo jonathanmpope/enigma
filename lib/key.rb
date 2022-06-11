@@ -16,9 +16,4 @@ class Key
     @c_key = @num[2..3]
     @d_key = @num[3..4]
   end
-
-  def num_gen
-    num = rand(0..99999)
-    @num = "%05d" % num
-  end
 end
