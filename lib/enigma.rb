@@ -28,7 +28,6 @@ class Enigma
     }
   end
 
-
   def object_creator(info, key, date)
     @message = Message.new(info)
     @key = Key.new(key)
@@ -48,44 +47,6 @@ class Enigma
     d = today[8..9]
     m.concat(d).concat(y)
   end
-
-  # def encryption_process
-  #   @encryption_message = @message.broken_up.map { |index, letter| encryption_logic(index, letter) }
-  #   @encryption_message.join("")
-  # end
-  #
-  # def encryption_logic(index, letter)
-  #   if index % 4 == 0 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(@shift.a_shift + @message.set.find_index(letter))[0]
-  #   elsif index % 4 == 1 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(@shift.b_shift + @message.set.find_index(letter))[0]
-  #   elsif index % 4 == 2 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(@shift.c_shift + @message.set.find_index(letter))[0]
-  #   elsif index % 4 == 3 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(@shift.d_shift + @message.set.find_index(letter))[0]
-  #   else
-  #     letter
-  #   end
-  # end
-
-  # def decryption_process
-  #   @decryption_message = @message.broken_up.map { |index, letter| decryption_logic(index, letter) }
-  #   @decryption_message.join("")
-  # end
-  #
-  # def decryption_logic(index, letter)
-  #   if index % 4 == 0 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(-@shift.a_shift + @message.set.find_index(letter))[0]
-  #   elsif index % 4 == 1 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(-@shift.b_shift + @message.set.find_index(letter))[0]
-  #   elsif index % 4 == 2 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(-@shift.c_shift + @message.set.find_index(letter))[0]
-  #   elsif index % 4 == 3 && @message.set.include?(letter) == true
-  #     letter = @message.set.rotate(-@shift.d_shift + @message.set.find_index(letter))[0]
-  #   else
-  #     letter
-  #   end
-  # end
 
   def enc_file_read
     in_file = File.open(@from_file, "r")
