@@ -19,7 +19,9 @@ $ ruby ./lib/encrypt.rb message.txt encrypted.txt
   4. To **decrypt**, in the main directory, run:
   ```
   $ ruby ./lib/decrypt.rb encrypted.txt decrypted.txt 82648 240818
+
   ```
+  
     * The *5 digit code* is your key and the *six digit code* is the date. Both are necessary to decrypt.
     * The message you want to decrypt goes in the *encrypted.txt* file (also in the main directory).
     * The decrypted message shows up in the *decrypted.txt* file (also in the main directory.

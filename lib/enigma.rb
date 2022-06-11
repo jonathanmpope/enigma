@@ -65,8 +65,9 @@ class Enigma
   end
 
   def message
-    puts "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
-    "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+    final_message = "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+    puts final_message
+    final_message 
   end
 
   def dec_file_read(key, date)
