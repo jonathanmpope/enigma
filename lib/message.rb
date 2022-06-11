@@ -3,7 +3,7 @@ class Message
 
   def initialize(info)
     @info = info
-    @broken_up = message_array_of_strings(info)
+    @broken_up = message_hash(info)
     @set = character_set
   end
 
@@ -11,8 +11,9 @@ class Message
     ("a".."z").to_a << " "
   end
 
-  def message_array_of_strings(message)
-    message.chars
+  def message_hash(message)
+    array = message.downcase.chars
+    indexes = Array(0..array.size - 1)
+    Hash[indexes.zip array]
   end
-
 end

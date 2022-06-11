@@ -10,7 +10,7 @@ RSpec.describe do
       expect(@key).to be_instance_of Key
     end
 
-    it 'creates a random five digit number' do
+    it 'creates a random five digit number if one is not passed in' do
       expect(@key.num.length).to eq(5)
       expect(@key.num.class).to eq(String)
       expect(@key_2.num).to eq("01552")
