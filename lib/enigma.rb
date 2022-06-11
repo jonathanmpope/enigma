@@ -1,11 +1,19 @@
+require './lib/key'
+require './lib/offset'
+require './lib/shift'
+require './lib/message'
+
 class Enigma
 
-  def initialize
+  def initialize(from_file = nil, to_file = nil)
+    @from_file = from_file
+    @to_file = to_file
+    @enc_output = nil
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
     object_creator(info, key, date)
-    encryption = {
+    @encryption = {
       encryption: encryption_process,
       key: @key.num,
       date: @offset.date
@@ -14,7 +22,7 @@ class Enigma
 
   def decrypt(info, key, date = date_gen)
     object_creator(info, key, date)
-    encryption = {
+    decryption = {
       decryption: decryption_process,
       key: @key.num,
       date: @offset.date
@@ -78,5 +86,25 @@ class Enigma
     else
       letter
     end
+  end
+
+  # def enc_file_read
+  #   in_file = File.open(@from_file, "r")
+  #   indata = in_file.read
+  #   in_file.close
+  #   encrypt(indata)
+  #   enc_file_writer(@encryption[:encryption])
+  # end
+  #
+  # def enc_file_writer(message)
+  #   out_file = File.open(@to_file, 'w')
+  #   out_file.write(message)
+  #   out_file.close
+  #   enc_message
+  # end
+
+  def enc_message
+    puts "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"
+    "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"
   end
 end

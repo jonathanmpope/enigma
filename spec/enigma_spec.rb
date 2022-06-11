@@ -56,6 +56,7 @@ RSpec.describe do
 
   it 'can encrypt the message - can deal with symbols' do
     expect(@enigma.encrypt("hello wor!d", "02715", "040895")[:encryption]).to eq("keder ohu!w")
+    # binding.pry
   end
 
   it 'can encrypt the message - can deal with upper case letters' do
@@ -77,7 +78,6 @@ RSpec.describe do
     d = today[8..9]
     date = m.concat(d).concat(y)
     hash = @enigma.decrypt("keder ohulw", "02715", date)
-    # binding.pry
     expect(@enigma.decrypt("keder ohulw", "02715")).to eq({
                                     decryption: hash[:decryption],
                                     key: "02715",
@@ -97,4 +97,26 @@ RSpec.describe do
   it 'can decrypt the message - can deal with upper case letters' do
     expect(@enigma.decrypt("KEDer ohulw", "02715", "040895")[:decryption]).to eq("hello world")
   end
+
+  xit 'can read a file' do
+    # @from_file = double('test_read_file.txt')
+    file = 'test_read_file.txt'
+    # in_file = File.open('./spec/test_read_file.txt', "r")
+    allow(File).to receive(:open).and_return(file)
+    # allow(in_file).to receive(:read).and_return("test")
+    # .with("filename", "w").and_return(file)
+    # allow(File).to receive(:read).and_return("text")
+    # data = "This is a message"
+    # file = test_read_file.txt
+    # allow(File).to receive(:open).and_return(file)
+    # allow(File).to receive(:read).and_return(data)
+    expect(@enigma.enc_file_read).to eq("This is a message")
+  end
+
+  it 'can print an enryption message' do
+    @enigma.object_creator("keder ohulw", "02715", "040895")
+    @enigma.enc_message
+    expect(@enigma.enc_message).to include("Created")
+  end
+
 end
