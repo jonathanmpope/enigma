@@ -88,20 +88,21 @@ class Enigma
     end
   end
 
-  # def enc_file_read
-  #   in_file = File.open(@from_file, "r")
-  #   indata = in_file.read
-  #   in_file.close
-  #   encrypt(indata)
-  #   enc_file_writer(@encryption[:encryption])
-  # end
-  #
-  # def enc_file_writer(message)
-  #   out_file = File.open(@to_file, 'w')
-  #   out_file.write(message)
-  #   out_file.close
-  #   enc_message
-  # end
+  def enc_file_read
+    in_file = File.open(@from_file, "r")
+    indata = in_file.read
+    in_file.close
+    encrypt(indata)
+    enc_file_writer(@encryption[:encryption])
+    indata
+  end
+
+  def enc_file_writer(message)
+    out_file = File.open(@to_file, 'w')
+    out_file.write(message)
+    out_file.close
+    enc_message
+  end
 
   def enc_message
     puts "Created #{@to_file} with the key #{@key.num} and date #{@offset.date}"

@@ -98,19 +98,18 @@ RSpec.describe do
     expect(@enigma.decrypt("KEDer ohulw", "02715", "040895")[:decryption]).to eq("hello world")
   end
 
-  xit 'can read a file' do
-    # @from_file = double('test_read_file.txt')
-    file = 'test_read_file.txt'
-    # in_file = File.open('./spec/test_read_file.txt', "r")
-    allow(File).to receive(:open).and_return(file)
-    # allow(in_file).to receive(:read).and_return("test")
-    # .with("filename", "w").and_return(file)
-    # allow(File).to receive(:read).and_return("text")
-    # data = "This is a message"
-    # file = test_read_file.txt
-    # allow(File).to receive(:open).and_return(file)
-    # allow(File).to receive(:read).and_return(data)
-    expect(@enigma.enc_file_read).to eq("This is a message")
+  it 'can read a file' do
+    from_file = 'test_read_file.txt'
+    to_file = 'encrypted.txt'
+    @enigma = Enigma.new(from_file, to_file)
+    expect(@enigma.enc_file_read).to include("This is a test")
+  end
+
+  it 'can write a file' do
+    from_file = 'test_read_file.txt'
+    to_file = 'encrypted.txt'
+    @enigma = Enigma.new(from_file, to_file)
+    expect(@enigma.enc_file_read).to include("This is a test")
   end
 
   it 'can print an enryption message' do
