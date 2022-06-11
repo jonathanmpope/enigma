@@ -40,4 +40,22 @@ RSpec.describe do
   it 'can decrypt the message - helper function' do
     expect(@message_2.decryption_process(@shift)).to eq("hello world")
   end
+
+  it 'can use decryption_logic' do
+    index = 0
+    letter = "k"
+    expect(@message_2.decryption_logic(@shift, index, letter)).to eq("h")
+  end
+
+  it 'can use encryption_logic' do
+    index = 0
+    letter = "h"
+    expect(@message.encryption_logic(@shift, index, letter)).to eq("k")
+  end
+
+  it 'can assign letters' do
+    letter = "h"
+    let_shift = 3
+    expect(@message.let_assign(letter, let_shift)).to eq("k")
+  end
 end

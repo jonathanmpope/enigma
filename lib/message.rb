@@ -24,17 +24,11 @@ class Message
   end
 
   def encryption_logic(shift, index, letter)
-    if index % 4 == 0 && @set.include?(letter) == true
-      letter = @set.rotate(shift.a_shift + @set.find_index(letter))[0]
-    elsif index % 4 == 1 && @set.include?(letter) == true
-      letter = @set.rotate(shift.b_shift + @set.find_index(letter))[0]
-    elsif index % 4 == 2 && @set.include?(letter) == true
-      letter = @set.rotate(shift.c_shift + @set.find_index(letter))[0]
-    elsif index % 4 == 3 && @set.include?(letter) == true
-      letter = @set.rotate(shift.d_shift + @set.find_index(letter))[0]
-    else
-      letter
-    end
+    index % 4 == 0 && @set.include?(letter) ? letter = let_assign(letter, shift.a_shift) : nil
+    index % 4 == 1 && @set.include?(letter) ? letter = let_assign(letter, shift.b_shift) : nil
+    index % 4 == 2 && @set.include?(letter) ? letter = let_assign(letter, shift.c_shift) : nil
+    index % 4 == 3 && @set.include?(letter) ? letter = let_assign(letter, shift.d_shift) : nil
+    letter
   end
 
   def decryption_process(shift)
@@ -43,16 +37,14 @@ class Message
   end
 
   def decryption_logic(shift, index, letter)
-    if index % 4 == 0 && @set.include?(letter) == true
-      letter = @set.rotate(-shift.a_shift + @set.find_index(letter))[0]
-    elsif index % 4 == 1 && @set.include?(letter) == true
-      letter = @set.rotate(-shift.b_shift + @set.find_index(letter))[0]
-    elsif index % 4 == 2 && @set.include?(letter) == true
-      letter = @set.rotate(-shift.c_shift + @set.find_index(letter))[0]
-    elsif index % 4 == 3 && @set.include?(letter) == true
-      letter = @set.rotate(-shift.d_shift + @set.find_index(letter))[0]
-    else
-      letter
-    end
+    index % 4 == 0 && @set.include?(letter) ? letter = let_assign(letter, -shift.a_shift) : nil
+    index % 4 == 1 && @set.include?(letter) ? letter = let_assign(letter, -shift.b_shift) : nil
+    index % 4 == 2 && @set.include?(letter) ? letter = let_assign(letter, -shift.c_shift) : nil
+    index % 4 == 3 && @set.include?(letter) ? letter = let_assign(letter, -shift.d_shift) : nil
+    letter
+  end
+
+  def let_assign(letter, let_shift)
+    letter = @set.rotate(let_shift + @set.find_index(letter))[0]
   end
 end

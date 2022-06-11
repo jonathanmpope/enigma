@@ -57,9 +57,9 @@ class Enigma
     indata
   end
 
-  def file_writer(message)
+  def file_writer(info)
     out_file = File.open(@to_file, 'w')
-    out_file.write(message)
+    out_file.write(info)
     out_file.close
     message
   end
