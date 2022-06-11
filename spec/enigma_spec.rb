@@ -49,14 +49,9 @@ RSpec.describe do
     expect(@enigma.object_creator("hello world", "02715", "040895").class).to eq(Shift)
   end
 
-  it 'can encrypt the message - helper function' do
-    @enigma.object_creator("hello world", "02715", "040895")
-    expect(@enigma.encryption_process).to eq("keder ohulw")
-  end
 
   it 'can encrypt the message - can deal with symbols' do
     expect(@enigma.encrypt("hello wor!d", "02715", "040895")[:encryption]).to eq("keder ohu!w")
-    # binding.pry
   end
 
   it 'can encrypt the message - can deal with upper case letters' do
@@ -83,11 +78,6 @@ RSpec.describe do
                                     key: "02715",
                                     date: hash[:date]
                                    })
-  end
-
-  it 'can decrypt the message - helper function' do
-    @enigma.object_creator("keder ohulw", "02715", "040895")
-    expect(@enigma.decryption_process).to eq("hello world")
   end
 
   it 'can decrypt the message - can deal with symbols' do
