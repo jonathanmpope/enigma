@@ -4,10 +4,15 @@ require './lib/shift'
 require './lib/message'
 
 class Enigma
+    attr_reader :from_file, :to_file, :key, :offset, :shift, :message
 
   def initialize(from_file = nil, to_file = nil)
     @from_file = from_file
     @to_file = to_file
+    @key = nil
+    @offset = nil
+    @shift = nil
+    @message = nil
   end
 
   def encrypt(info, key = key_creator, date = date_gen)
@@ -57,10 +62,10 @@ class Enigma
     out_file = File.open(@to_file, 'w')
     out_file.write(info)
     out_file.close
-    message
+    print_message
   end
 
-  def message
+  def print_message
     final_message = "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
     puts final_message
     final_message

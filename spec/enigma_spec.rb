@@ -3,10 +3,19 @@ require 'spec_helper'
 RSpec.describe do
   before :each do
     @enigma = Enigma.new
+    @enigma_2 = Enigma.new("message.txt", "encrypted.txt")
   end
 
   it 'exists' do
     expect(@enigma).to be_instance_of Enigma
+  end
+
+  it 'can have a from file argument' do
+    expect(@enigma_2.from_file).to eq("message.txt")
+  end
+
+  it 'can have a to file argument' do
+    expect(@enigma_2.to_file).to eq("encrypted.txt")
   end
 
   it 'can encrypt a message' do
@@ -101,12 +110,33 @@ RSpec.describe do
     to_file = 'encrypted.txt'
     @enigma = Enigma.new(from_file, to_file)
     @enigma.enc_file_read
-    expect(@enigma.message).to include(to_file)
+    expect(@enigma.print_message).to include(to_file)
   end
 
   it 'can print an enryption message' do
     @enigma.object_creator("keder ohulw", "02715", "040895")
     @enigma.message
-    expect(@enigma.message).to include("Created")
+    expect(@enigma.print_message).to include("Created")
+  end
+
+  it 'creates the message, key, offset, and shift objects' do
+    @enigma.object_creator("keder ohulw", "02715", "040895")
+    expect(@enigma.key.class).to eq(Key)
+    expect(@enigma.offset.class).to eq(Offset)
+    expect(@enigma.shift.class).to eq(Shift)
+    expect(@enigma.message.class).to eq(Message)
+  end
+
+  it 'creates the shift' do
+    @enigma.object_creator("keder ohulw", "01552", "011092")
+    expect(@enigma.shift.create_shift(@enigma.key, @enigma.offset)).to eq("3196156")
+  end
+
+  it 'assigns shifts' do
+    @enigma.object_creator("keder ohulw", "01552", "011092")
+    expect(@enigma.shift.a_shift).to eq(3)
+    expect(@enigma.shift.b_shift).to eq(19)
+    expect(@enigma.shift.c_shift).to eq(61)
+    expect(@enigma.shift.d_shift).to eq(56)
   end
 end

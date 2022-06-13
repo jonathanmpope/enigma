@@ -11,7 +11,7 @@ RSpec.describe do
     expect(@shift).to be_instance_of Shift
   end
 
-  it 'creates the shifts' do
+  it 'creates the shift' do
     expect(@shift.create_shift(@key, @offset)).to eq("3196156")
   end
 
