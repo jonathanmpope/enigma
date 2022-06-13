@@ -42,11 +42,11 @@ class Enigma
 
   def key_creator
     num = rand(0..99999)
-    test = "%05d" % num
+    "%05d" % num
   end
 
   def date_gen
-    (Time.now).strftime("%d%m%y")
+    Time.now.strftime("%d%m%y")
   end
 
   def enc_file_read

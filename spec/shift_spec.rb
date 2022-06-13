@@ -12,7 +12,9 @@ RSpec.describe do
   end
 
   it 'creates the shift' do
-    expect(@shift.create_shift(@key, @offset)).to eq("3196156")
+    key = double("key", num: "01552", a_key: "01", b_key: "15", c_key: "55", d_key: "52")
+    offset = double("offset", a_key: "2", b_key: "4", c_key: "6", d_key: "4")
+    expect(@shift.create_shift(key, offset)).to eq("3196156")
   end
 
   it 'has a key' do

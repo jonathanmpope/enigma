@@ -6,7 +6,6 @@ class Message
     @broken_up = message_hash(info)
     @set = character_set
     @encryption_message = encryption_message
-    
   end
 
   def character_set
