@@ -37,15 +37,11 @@ class Enigma
 
   def key_creator
     num = rand(0..99999)
-    "%05d" % num
+    test = "%05d" % num
   end
 
   def date_gen
-    today = Time.now.to_s
-    y = today[2..3]
-    m = today[5..6]
-    d = today[8..9]
-    m.concat(d).concat(y)
+    (Time.now).strftime("%d%m%y")
   end
 
   def enc_file_read
@@ -67,7 +63,7 @@ class Enigma
   def message
     final_message = "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
     puts final_message
-    final_message 
+    final_message
   end
 
   def dec_file_read(key, date)

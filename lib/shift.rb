@@ -1,5 +1,5 @@
 class Shift
-  attr_reader :a_shift, :b_shift, :c_shift, :d_shift
+  attr_reader :a_shift, :b_shift, :c_shift, :d_shift, :key, :offset
 
   def initialize(key, offset)
     @shifts = create_shift(key, offset)
@@ -7,6 +7,8 @@ class Shift
     @b_shift = b_shift
     @c_shift = c_shift
     @d_shift = d_shift
+    @key = key
+    @offset = offset
   end
 
   def create_shift(key, offset)

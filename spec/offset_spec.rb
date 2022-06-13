@@ -40,5 +40,4 @@ RSpec.describe do
     expect(@offset.c_key).to eq("6")
     expect(@offset.d_key).to eq("4")
   end
-
 end
