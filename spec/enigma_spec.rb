@@ -26,13 +26,21 @@ RSpec.describe do
                                    })
   end
 
+  it 'can encrypt a message with numbers' do
+    expect(@enigma.encrypt("hello wor33", "02715", "040895")).to eq({
+                                    encryption: "keder ohu33",
+                                    key: "02715",
+                                    date: "040895"
+                                   })
+  end
+
   it 'can can create a random key' do
     allow(@enigma).to receive(:key_creator).and_return("01234")
     expect(@enigma.encrypt("hello world")[:key]).to eq("01234")
   end
 
   it 'can can create a random key' do
-    allow(@enigma).to receive(:date_gen).and_return("101214")
+    allow(@enigma).to receive(:date_generator).and_return("101214")
     expect(@enigma.encrypt("hello world")[:date]).to eq("101214")
   end
 
@@ -57,8 +65,8 @@ RSpec.describe do
   end
 
   it 'can create a date if one is not passed in' do
-     expect(@enigma.date_gen.length).to eq(6)
-     expect(@enigma.date_gen.class).to eq(String)
+     expect(@enigma.date_generator.length).to eq(6)
+     expect(@enigma.date_generator.class).to eq(String)
   end
 
   it 'creates the message, key, offset, and shift objects' do

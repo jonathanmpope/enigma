@@ -13,7 +13,7 @@ class Enigma
     @shift = shift
   end
 
-  def encrypt(info, key = key_creator, date = date_gen)
+  def encrypt(info, key = key_creator, date = date_generator)
     object_creator(info, key, date)
     @encryption = {
       encryption: @message.encryption_process(@shift),
@@ -22,7 +22,7 @@ class Enigma
     }
   end
 
-  def decrypt(info, key, date = date_gen)
+  def decrypt(info, key, date = date_generator)
     object_creator(info, key, date)
     @decryption = {
       decryption: @message.decryption_process(@shift),
@@ -41,7 +41,7 @@ class Enigma
     "%05d" % num
   end
 
-  def date_gen
+  def date_generator
     date = Time.now.strftime("%d%m%y")
   end
 
