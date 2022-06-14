@@ -2,9 +2,7 @@ require 'spec_helper'
 
 RSpec.describe do
   before :each do
-    @offset = Offset.new("040895")
-    @key = Key.new("02715")
-    @shift = Shift.new(@key, @offset)
+    @shift = Shift.new("02715", "040895")
     @message = Message.new("hello world")
     @message_2 = Message.new("keder ohulw")
   end

@@ -4,35 +4,36 @@ require './lib/shift'
 require './lib/message'
 
 class Enigma
+    attr_reader :from_file, :to_file, :shift, :message
 
   def initialize(from_file = nil, to_file = nil)
     @from_file = from_file
     @to_file = to_file
+    @message = message
+    @shift = shift
   end
 
-  def encrypt(info, key = key_creator, date = date_gen)
+  def encrypt(info, key = key_creator, date = date_generator)
     object_creator(info, key, date)
     @encryption = {
       encryption: @message.encryption_process(@shift),
-      key: @key.num,
-      date: @offset.date
+      key: key,
+      date: date
     }
   end
 
-  def decrypt(info, key, date = date_gen)
+  def decrypt(info, key, date = date_generator)
     object_creator(info, key, date)
     @decryption = {
       decryption: @message.decryption_process(@shift),
-      key: @key.num,
-      date: @offset.date
+      key: key,
+      date: date
     }
   end
 
   def object_creator(info, key, date)
     @message = Message.new(info)
-    @key = Key.new(key)
-    @offset = Offset.new(date)
-    @shift = Shift.new(@key, @offset)
+    @shift = Shift.new(key, date)
   end
 
   def key_creator
@@ -40,12 +41,8 @@ class Enigma
     "%05d" % num
   end
 
-  def date_gen
-    today = Time.now.to_s
-    y = today[2..3]
-    m = today[5..6]
-    d = today[8..9]
-    m.concat(d).concat(y)
+  def date_generator
+    date = Time.now.strftime("%d%m%y")
   end
 
   def enc_file_read
@@ -61,12 +58,13 @@ class Enigma
     out_file = File.open(@to_file, 'w')
     out_file.write(info)
     out_file.close
-    message
+    print_message
   end
 
-  def message
-    puts "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
-    "Created '#{@to_file}' with the key #{@key.num} and date #{@offset.date}"
+  def print_message
+    final_message = "Created '#{@to_file}' with the key #{@shift.key.num} and date #{@shift.offset.date}"
+    puts final_message
+    final_message
   end
 
   def dec_file_read(key, date)

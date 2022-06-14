@@ -1,7 +1,7 @@
 class Key
   attr_reader :num, :a_key, :b_key, :c_key, :d_key
 
-  def initialize(num = num_gen)
+  def initialize(num)
     @num = num
     @key_gen = keys_key_gen
     @a_key = a_key

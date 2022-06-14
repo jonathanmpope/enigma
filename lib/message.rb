@@ -13,9 +13,9 @@ class Message
   end
 
   def message_hash(message)
-    array = message.downcase.chars
-    indexes = Array(0..array.size - 1)
-    Hash[indexes.zip array]
+    letter_array = message.downcase.chars
+    indexes = Array(0..letter_array.size - 1)
+    Hash[indexes.zip letter_array]
   end
 
   def encryption_process(shift)
