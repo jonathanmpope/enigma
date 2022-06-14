@@ -2,9 +2,7 @@ require 'spec_helper'
 
 RSpec.describe do
   before :each do
-    @offset = Offset.new("011092")
-    @key = Key.new("01552")
-    @shift = Shift.new(@key, @offset)
+    @shift = Shift.new("01552", "011092")
   end
 
   it 'exists' do
@@ -18,11 +16,11 @@ RSpec.describe do
   end
 
   it 'has a key' do
-      expect(@shift.key).to eq(@key)
+      expect(@shift.key.class).to eq(Key)
   end
 
   it 'has an offset' do
-      expect(@shift.offset).to eq(@offset)
+      expect(@shift.offset.class).to eq(Offset)
   end
 
   it 'assigns shifts' do

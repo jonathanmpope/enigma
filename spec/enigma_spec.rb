@@ -63,8 +63,6 @@ RSpec.describe do
 
   it 'creates the message, key, offset, and shift objects' do
     @enigma.object_creator("keder ohulw", "02715", "040895")
-    expect(@enigma.key.class).to eq(Key)
-    expect(@enigma.offset.class).to eq(Offset)
     expect(@enigma.shift.class).to eq(Shift)
     expect(@enigma.message.class).to eq(Message)
   end
@@ -129,13 +127,12 @@ RSpec.describe do
 
   it 'can print an enryption message' do
     @enigma.object_creator("keder ohulw", "02715", "040895")
-    @enigma.message
     expect(@enigma.print_message).to include("Created")
   end
 
   it 'creates the shift' do
     @enigma.object_creator("keder ohulw", "01552", "011092")
-    expect(@enigma.shift.create_shift(@enigma.key, @enigma.offset)).to eq("3196156")
+    expect(@enigma.shift.create_shift(@enigma.shift.key, @enigma.shift.offset)).to eq("3196156")
   end
 
   it 'assigns shifts' do
